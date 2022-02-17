@@ -1,0 +1,102 @@
+import random
+
+points_White = 0
+points_Black = 0
+sum = 0
+cnt = 0
+# φτιάχνω την σκακιέρα μου 8χ8
+board = ["*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*",
+         "*", "*", "*", "*", "*", "*", "*", "*", ]
+
+for i in range(0, 100):
+    # τοποθετώ την βασίλισσα τον πύργο και των αξιωματικό σε τυχαίες θέσεις
+    position = random.randint(0, 63)
+    board[random.randint(0, 63)] = 'vasilissa'
+    board[random.randint(0, 63)] = 'pirgos'
+    board[random.randint(0, 63)] = "aksiomatikos"
+    # ψάχνω την βασίλισσα
+    for j in range(63):
+        cnt = cnt + 1
+        if board[j] == 'vasilissa':
+            break
+
+    pyrgos_found = True
+    if pyrgos_found:
+        for k in range(j, 63, 8):
+            if k + 8 < 63:
+                break
+            if board[k] == 'pirgos':
+                pyrgos_found = False
+                points_Black = points_Black + 1
+                points_White = points_White + 1
+
+    if pyrgos_found:
+        for k in range(j, 0, -8):
+            if k - 8 < 0:
+                break
+                if board[k] == 'pirgos':
+                    points_Black = points_Black + 1
+                    points_White = points_White + 1
+                    pyrgos_found = False
+    aksiomatikos_found = True
+    if aksiomatikos_found or pyrgos_found:
+        for k in range(j, 63, 7):
+            if j == 0:
+                break
+            if k % 8 == 0:
+                break
+                if board[k] == 'pirgos':
+                    points_Black = points_Black + 1
+                    pyrgos_found = False
+                if board[k] == "aksiomatikos":
+                    points_Black = points_Black + 1
+                    points_White = points_White + 1
+                    aksiomatikos_found = False
+
+    if aksiomatikos_found or pyrgos_found:
+        for k in range(j, 63, 9):
+            if k % 7 == 1:
+                break
+            if board[k] == 'pirgos':
+                points_Black = points_Black + 1
+                pyrgos_found = False
+            if board[k] == "aksiomatikos":
+                points_Black = points_Black + 1
+                points_White = points_White + 1
+                aksiomatikos_found = False
+
+    if aksiomatikos_found or pyrgos_found:
+        for k in range(j, 0, -7):
+            if k % 7 == 1:
+                break
+            if board[k] == 'pirgos':
+                points_Black = points_Black + 1
+                pyrgos_found = False
+            if board[k] == "aksiomatikos":
+                points_Black = points_Black + 1
+                points_White = points_White + 1
+                aksiomatikos_found = False
+
+    if aksiomatikos_found or pyrgos_found:
+        for k in range(j, 0, -9):
+            if k % 8 == 0:
+                break
+            if board[k] == 'pirgos':
+                points_Black = points_Black + 1
+                pyrgos_found = False
+            if board[k] == "aksiomatikos":
+                points_Black = points_Black + 1
+                points_White = points_White + 1
+                aksiomatikos_found = False
+print("the white one gets:")
+print(points_White)
+print("points")
+print("the black one gets:")
+print(points_Black)
+print("points")
