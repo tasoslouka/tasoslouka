@@ -1,29 +1,30 @@
 import random
 
-points_White = 0
-points_Black = 0
+WHITE_POINTS = 0
+BLACK_POINTS = 0
 sum = 0
 cnt = 0
-# φτιάχνω την σκακιέρα μου 8χ8
-board = ["*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*",
-         "*", "*", "*", "*", "*", "*", "*", "*", ]
+# φτιάχνω την σκακιέρα
+board = ["_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         "_", "_", "_", "_", "_", "_", "_", "_",
+         ]
 
 for i in range(0, 100):
-    # τοποθετώ την βασίλισσα τον πύργο και των αξιωματικό σε τυχαίες θέσεις
+    # τοποθετώ  βασίλισσα, πύργο και των αξιωματικό σε τυχαίες θέσεις
     position = random.randint(0, 63)
-    board[random.randint(0, 63)] = 'vasilissa'
-    board[random.randint(0, 63)] = 'pirgos'
-    board[random.randint(0, 63)] = "aksiomatikos"
+    board[random.randint(0, 63)] = 'queen'
+    board[random.randint(0, 63)] = 'pirg'
+    board[random.randint(0, 63)] = "aksiom"
     # ψάχνω την βασίλισσα
     for j in range(63):
         cnt = cnt + 1
-        if board[j] == 'vasilissa':
+        if board[j] == 'queen':
             break
 
     pyrgos_found = True
@@ -31,18 +32,18 @@ for i in range(0, 100):
         for k in range(j, 63, 8):
             if k + 8 < 63:
                 break
-            if board[k] == 'pirgos':
+            if board[k] == 'pirg':
                 pyrgos_found = False
-                points_Black = points_Black + 1
-                points_White = points_White + 1
+                BLACK_POINTS = BLACK_POINTS + 1
+                WHITE_POINTS = WHITE_POINTS + 1
 
     if pyrgos_found:
         for k in range(j, 0, -8):
             if k - 8 < 0:
                 break
-                if board[k] == 'pirgos':
-                    points_Black = points_Black + 1
-                    points_White = points_White + 1
+                if board[k] == 'pirg':
+                    BLACK_POINTS = BLACK_POINTS + 1
+                    WHITE_POINTS = WHITE_POINTS + 1
                     pyrgos_found = False
     aksiomatikos_found = True
     if aksiomatikos_found or pyrgos_found:
@@ -51,52 +52,53 @@ for i in range(0, 100):
                 break
             if k % 8 == 0:
                 break
-                if board[k] == 'pirgos':
-                    points_Black = points_Black + 1
+                if board[k] == 'pirg':
+                    BLACK_POINTS = BLACK_POINTS + 1
                     pyrgos_found = False
-                if board[k] == "aksiomatikos":
-                    points_Black = points_Black + 1
-                    points_White = points_White + 1
+                if board[k] == "aksiom":
+                    BLACK_POINTS = BLACK_POINTS + 1
+                    WHITE_POINTS = WHITE_POINTS + 1
                     aksiomatikos_found = False
 
     if aksiomatikos_found or pyrgos_found:
         for k in range(j, 63, 9):
             if k % 7 == 1:
                 break
-            if board[k] == 'pirgos':
-                points_Black = points_Black + 1
+            if board[k] == 'pirg':
+                BLACK_POINTS = BLACK_POINTS + 1
                 pyrgos_found = False
-            if board[k] == "aksiomatikos":
-                points_Black = points_Black + 1
-                points_White = points_White + 1
+            if board[k] == "aksiom":
+                BLACK_POINTS = BLACK_POINTS + 1
+                WHITE_POINTS = WHITE_POINTS + 1
                 aksiomatikos_found = False
 
     if aksiomatikos_found or pyrgos_found:
         for k in range(j, 0, -7):
             if k % 7 == 1:
                 break
-            if board[k] == 'pirgos':
-                points_Black = points_Black + 1
+            if board[k] == 'pirg':
+                BLACK_POINTS = BLACK_POINTS + 1
                 pyrgos_found = False
-            if board[k] == "aksiomatikos":
-                points_Black = points_Black + 1
-                points_White = points_White + 1
+            if board[k] == "aksiom":
+                BLACK_POINTS = BLACK_POINTS + 1
+                WHITE_POINTS = WHITE_POINTS + 1
                 aksiomatikos_found = False
 
     if aksiomatikos_found or pyrgos_found:
         for k in range(j, 0, -9):
             if k % 8 == 0:
                 break
-            if board[k] == 'pirgos':
-                points_Black = points_Black + 1
+            if board[k] == 'pirg':
+                BLACK_POINTS = BLACK_POINTS + 1
                 pyrgos_found = False
-            if board[k] == "aksiomatikos":
-                points_Black = points_Black + 1
-                points_White = points_White + 1
+            if board[k] == "aksiom":
+                BLACK_POINTS = BLACK_POINTS + 1
+                WHITE_POINTS = WHITE_POINTS + 1
                 aksiomatikos_found = False
 print("the white one gets:")
-print(points_White)
+print(WHITE_POINTS)
 print("points")
 print("the black one gets:")
-print(points_Black)
+print(BLACK_POINTS)
 print("points")
+
